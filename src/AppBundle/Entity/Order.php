@@ -5,12 +5,12 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Shop_order
+ * Order
  *
  * @ORM\Table(name="shop_order")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Shop_orderRepository")
  */
-class Shop_order
+class Order
 {
     /**
      * @var int
@@ -31,7 +31,7 @@ class Shop_order
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="orderedAt", type="datetime")
+     * @ORM\Column(name="ordered_at", type="datetime")
      */
     private $orderedAt;
 
@@ -45,10 +45,23 @@ class Shop_order
     /**
      * @var float
      *
-     * @ORM\Column(name="totalRate", type="decimal", precision=8, scale=2)
+     * @ORM\Column(name="total_price", type="decimal", precision=8, scale=2)
      */
-    private $totalRate;
+    private $totalPrice;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="email", type="string", length=255)
+     */
+    private $email;
+
+    /**
+     * @var array
+     * One Order has Many Tickets.
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order")
+     */
+    private $tickets;
 
     /**
      * Get id
@@ -65,7 +78,7 @@ class Shop_order
      *
      * @param string $type
      *
-     * @return Shop_order
+     * @return Order
      */
     public function setType($type)
     {
@@ -85,11 +98,11 @@ class Shop_order
     }
 
     /**
-     * Set orderedAt
+     * Set ordered_at
      *
-     * @param \DateTime $orderedAt
+     * @param \DateTime $ordered_at
      *
-     * @return Shop_order
+     * @return Order
      */
     public function setOrderedAt($orderedAt)
     {
@@ -99,7 +112,7 @@ class Shop_order
     }
 
     /**
-     * Get orderedAt
+     * Get ordered_at
      *
      * @return \DateTime
      */
@@ -113,7 +126,7 @@ class Shop_order
      *
      * @param integer $num
      *
-     * @return Shop_order
+     * @return Order
      */
     public function setNum($num)
     {
@@ -133,26 +146,70 @@ class Shop_order
     }
 
     /**
-     * Set totalRate
+     * Set total_price
      *
-     * @param float $totalRate
+     * @param float $total_price
      *
-     * @return Shop_order
+     * @return Order
      */
-    public function setTotalRate($totalRate)
+    public function setTotalPrice($totalPrice)
     {
-        $this->totalRate = $totalRate;
+        $this->totalPrice = $totalPrice;
 
         return $this;
     }
 
     /**
-     * Get totalRate
+     * Get total_price
      *
      * @return float
      */
-    public function getTotalRate()
+    public function getTotalPrice()
     {
-        return $this->totalRate;
+        return $this->totalPrice;
+    }
+
+    /**
+     * Set email
+     *
+     * @param string $email
+     *
+     * @return Order
+     */
+    public function setEmail($email)
+    {
+        $this->email = $email;
+
+        return $this;
+    }
+
+    /**
+     * Get email
+     *
+     * @return string
+     */
+    public function getEmail()
+    {
+        return $this->email;
+    }
+
+    /**
+     * Set tickets
+     *
+     * @param array $tickets
+     */
+    public function setTickets($tickets)
+    {
+        $this->tickets = $tickets;
+    }
+
+    /**
+     * Get tickets
+     *
+     * @return array
+     */
+    public function getTickets()
+    {
+        return $this->tickets;
     }
 }

@@ -22,16 +22,9 @@ class Ticket
     private $id;
 
     /**
-     * @var float
-     *
-     * @ORM\Column(name="total_price", type="decimal", precision=8, scale=2)
-     */
-    private $totalPrice;
-
-    /**
      * @var string
      *
-     * @ORM\Column(name="name", type="string", length=255)
+     * @ORM\Column(name="first_name", type="string", length=255)
      */
     private $firstName;
 
@@ -63,6 +56,13 @@ class Ticket
      */
     private $reducedPrice;
 
+    /**
+     * @var Order
+     * Many Tickets have One Order.
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\Order", inversedBy="tickets")
+     * @ORM\JoinColumn(name="order_id", referencedColumnName="id")
+     */
+    private $order;
 
     /**
      * Get id
@@ -75,105 +75,33 @@ class Ticket
     }
 
     /**
-     * Set type
+     * Set first_name
      *
-     * @param string $type
+     * @param string $first_name
      *
      * @return Ticket
      */
-    public function setType($type)
+    public function setFirstName($firstName)
     {
-        $this->type = $type;
+        $this->firstName = $firstName;
 
         return $this;
     }
 
     /**
-     * Get type
+     * Get first_name
      *
      * @return string
      */
-    public function getType()
+    public function getFirstName()
     {
-        return $this->type;
+        return $this->firstName;
     }
 
     /**
-     * Set description
+     * Set last_name
      *
-     * @param string $description
-     *
-     * @return Ticket
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Set totalRate
-     *
-     * @param float $totalRate
-     *
-     * @return Ticket
-     */
-    public function setTotalRate($totalRate)
-    {
-        $this->totalRate = $totalRate;
-
-        return $this;
-    }
-
-    /**
-     * Get totalRate
-     *
-     * @return float
-     */
-    public function getTotalRate()
-    {
-        return $this->totalRate;
-    }
-
-    /**
-     * Set name
-     *
-     * @param string $name
-     *
-     * @return Ticket
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Get name
-     *
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Set lastName
-     *
-     * @param string $lastName
+     * @param string $last_name
      *
      * @return Ticket
      */
@@ -185,7 +113,7 @@ class Ticket
     }
 
     /**
-     * Get lastName
+     * Get last_name
      *
      * @return string
      */
@@ -219,9 +147,9 @@ class Ticket
     }
 
     /**
-     * Set birthdayDate
+     * Set birthday_date
      *
-     * @param \DateTime $birthdayDate
+     * @param \DateTime $birthday_date
      *
      * @return Ticket
      */
@@ -233,7 +161,7 @@ class Ticket
     }
 
     /**
-     * Get birthdayDate
+     * Get birthday_date
      *
      * @return \DateTime
      */
@@ -243,26 +171,46 @@ class Ticket
     }
 
     /**
-     * Set reducedRate
+     * Set reduced_price
      *
-     * @param float $reducedRate
+     * @param float $reduced_price
      *
      * @return Ticket
      */
-    public function setReducedRate($reducedRate)
+    public function setReducedPrice($reducedPrice)
     {
-        $this->reducedRate = $reducedRate;
+        $this->reducedPrice = $reducedPrice;
 
         return $this;
     }
 
     /**
-     * Get reducedRate
+     * Get reduced_price
      *
      * @return float
      */
-    public function getReducedRate()
+    public function getReducedPrice()
     {
-        return $this->reducedRate;
+        return $this->reducedPrice;
+    }
+
+    /**
+     * Set order
+     *
+     * @param Order $order
+     */
+    public function setOrder($order)
+    {
+        $this->order = $order;
+    }
+
+    /**
+     * Get order
+     *
+     * @return Order
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 }
