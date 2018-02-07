@@ -293,7 +293,7 @@ class Order
      */
     public function __construct()
     {
-        $this->visitDay = new \Datetime();
+        $this->tickets = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
