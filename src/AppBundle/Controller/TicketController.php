@@ -5,14 +5,9 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Order;
+use AppBundle\Form\OrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
-use Symfony\Component\Form\Extension\Core\Type\FormType;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\HttpFoundation\Request;
 
 /**
  * Class TicketController
@@ -20,28 +15,25 @@ use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 class TicketController extends Controller
 {
 
-  public function showAction()
+  public function showAction(Request $request)
   {
     // Cree objet Order (pour une nouvelle commande)
     $order = new Order();
 
     // Cree le FormBuilder grace au service form factory
-    $formBuilder = $this->get('form.factory')->createBuilder(FormType::class, $order);
+    $form = $this->get('form.factory')->create(OrderType::class, $order);
 
-    // Ajout des champs de l'entite que l'on veut a notre formulaire
-    $formBuilder
-      ->add('visitDay',       DateType::class)
-      ->add('type',           TextType::class)
-      ->add('ticketQuantity', IntegerType::class)
-      ->add('email',          EmailType::class)
-      ->add('save',           SubmitType::class)
-      ;
+    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+      $em = $this->getDoctrine()->getManager();
+      $em->persist($order);
+      $em->flush;
 
-    // Generation du formulaire a partir du FormBuilder
-    $form = $formBuilder->getForm();
+      $request->getSession()->getFlashbag()->add('notice', 'Bien enregistrer.');
+    }
 
-    //On passe la methode createView() du formulaire a la vue
-    //afin qu'elle puisse afficher le formulaire toute seule
+    /*On passe la methode createView() du formulaire a la vue
+    afin qu'elle puisse afficher le formulaire toute seule
+    */
     return $this->render('AppBundle:form:step1.html.twig', array(
       'form' => $form->createView(),
     ));
