@@ -1,29 +1,32 @@
 <?php
 
-// src/AppBundle/Controller/TicketController.php
+// src/AppBundle/Controller/OrderController.php
 
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Order;
+use AppBundle\Entity\Ticket;
 use AppBundle\Form\OrderType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Class TicketController
+ * Class OrderController
  */
-class TicketController extends Controller
+class OrderController extends Controller
 {
 
   public function showAction(Request $request)
   {
-    // Cree objet Order (pour une nouvelle commande)
+    // Création de l'objet Order (pour une nouvelle commande)
     $order = new Order();
 
-    // Cree le FormBuilder grace au service form factory
-    $form = $this->get('form.factory')->create(OrderType::class, $order);
-
+    // Crée le FormBuilder grâce au service form factory
+    $form = $this->createForm(OrderType::class, $order);
+    /*Si la méthode est en POST, on fait le lien Requête <-> Formulaire, la variable
+    $order contient les valeurs entrées dans le formulaire par le visiteur*/
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+      //Enregistrement de $order en bdd
       $em = $this->getDoctrine()->getManager();
       $em->persist($order);
       $em->flush;
@@ -32,8 +35,7 @@ class TicketController extends Controller
     }
 
     /*On passe la methode createView() du formulaire a la vue
-    afin qu'elle puisse afficher le formulaire toute seule
-    */
+    afin qu'elle puisse afficher le formulaire toute seule*/
     return $this->render('AppBundle:form:step1.html.twig', array(
       'form' => $form->createView(),
     ));

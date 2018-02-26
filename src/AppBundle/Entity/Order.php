@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Order
@@ -293,6 +294,7 @@ class Order
      */
     public function __construct()
     {
+        $this->tickets = new ArrayCollection();
         $this->visitDay = new \Datetime();
     }
 
