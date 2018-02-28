@@ -3,6 +3,49 @@
 <!-- Vue du formulaire contenu dans OrderType -->
 <a href="#step1" class="text-muted" data-toggle="collapse" id="buy">Acheter un billet</a>
 
-<div class="collapse" id="step1">
+<div class="collapse" id="step1" data-prototype="{{ form_widget(form.tickets.vars.prototype)|e('html_attr') }}">
     {{ form(form) }}
 </div>
+
+<script type="text/javascript">
+
+// Script pour permettre l'ajout de nouveau billet
+var $collectionHolder;
+
+// setup an "add a ticket" link
+var $addTicketLink = $('<a href="#" class="add_ticket_link"Ajouter un billet</a>');
+var $newLinkLi = $('<li></li>').append($addTicketLink);
+
+jQuery(document).ready(function() {
+  //Get the ul that holds the collection of tickets
+  $collectionHolder = $('ul.tickets');
+
+  //add the "add a ticket" anchor and li to the tickets ul
+  $collectionHolder.append($newLinkLi);
+
+  $collectionHolder.data('index', $collectionHolder.find(':input').length);
+
+  $addTicketLink.on('click', function(e) {
+    // prevent the link form creating a "#" on the URL
+    e.preventDefault();
+
+    // add a new ticket form
+    addTicketForm($collectionHolder, $newLinkLi);
+  });
+});
+
+function addTicketForm($collectionHolder, $newLinkLi) {
+  var prototype = $collectionHolder.data('prototype');
+
+  var index = $collectionHolder.data('index');
+
+  var newForm = prototype;
+
+  newForm = newForm.replace(/__name__/g, index);
+  $collectionHolder.data('index',index + 1);
+
+  var $newFormLi = $('<li></li>').append(newForm);
+  $newLinkLi.before($newFormLi);
+}
+
+<script src="../web/vendor/jquery/jquery.min.js"></script>
