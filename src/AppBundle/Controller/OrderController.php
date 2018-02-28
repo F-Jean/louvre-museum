@@ -21,6 +21,8 @@ class OrderController extends Controller
     // Création de l'objet Order (pour une nouvelle commande)
     $order = new Order();
 
+    $ticket = new Ticket();
+    $order->getTickets()->add($ticket);
     // Crée le FormBuilder grâce au service form factory
     $form = $this->createForm(OrderType::class, $order);
     /*Si la méthode est en POST, on fait le lien Requête <-> Formulaire, la variable
@@ -36,7 +38,7 @@ class OrderController extends Controller
 
     /*On passe la methode createView() du formulaire a la vue
     afin qu'elle puisse afficher le formulaire toute seule*/
-    return $this->render('AppBundle:form:step1.html.twig', array(
+    return $this->render('AppBundle:defaults:index.html.twig', array(
       'form' => $form->createView(),
     ));
   }

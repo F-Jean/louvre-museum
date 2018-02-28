@@ -7,7 +7,7 @@
         <div class="row">
           <div class="col-lg-12 text-center">
             <h2 class="section-heading text-uppercase">Nos produits</h2>
-            {% include "AppBundle:form:step1.html.twig" %}
+            {{ include("AppBundle:form:step1.html.twig", { form: form }) }}
           </div>
         </div>
         <div class="section-ticket">
