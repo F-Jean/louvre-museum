@@ -21,7 +21,9 @@ class TicketType extends AbstractType
           ->add('firstName',    TextType::class)
           ->add('lastName',     TextType::class)
           ->add('country',      TextType::class)
-          ->add('birthdayDate', DateType::class)
+          ->add('birthdayDate', DateType::class, array(
+            'format' => 'dd-MM-yyyy'
+          ))
           ->add('reducedPrice', CheckboxType::class, array('required' => false));
     }
 

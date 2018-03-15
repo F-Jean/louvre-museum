@@ -18,26 +18,25 @@ class OrderController extends Controller
 
   public function showAction(Request $request)
   {
-    // Création de l'objet Order (pour une nouvelle commande)
+    // Creation of the Order's object
     $order = new Order();
 
-    $ticket = new Ticket();
-    $order->getTickets()->add($ticket);
-    // Crée le FormBuilder grâce au service form factory
+    // Create the FormBuilder via the form factory's service
     $form = $this->createForm(OrderType::class, $order);
-    /*Si la méthode est en POST, on fait le lien Requête <-> Formulaire, la variable
-    $order contient les valeurs entrées dans le formulaire par le visiteur*/
+    /* If the method is POST, carry out the link between Request <-> Form, the variable
+    $order contains the values entered in the form by the user */
     if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
-      //Enregistrement de $order en bdd
+      //Saving of $order in database
       $em = $this->getDoctrine()->getManager();
       $em->persist($order);
-      $em->flush;
+      $em->flush();
 
-      $request->getSession()->getFlashbag()->add('notice', 'Bien enregistrer.');
+      $this->addFlash('notice', 'Commande réussie');
+      return $this->redirect("homepage");
     }
 
-    /*On passe la methode createView() du formulaire a la vue
-    afin qu'elle puisse afficher le formulaire toute seule*/
+    /*We carry out the method createView() of the form to the view
+    in order that it can display the form on it owns */
     return $this->render('AppBundle:defaults:index.html.twig', array(
       'form' => $form->createView(),
     ));

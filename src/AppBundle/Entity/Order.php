@@ -4,6 +4,7 @@ namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Order
@@ -26,6 +27,7 @@ class Order
      * @var datetime
      *
      * @ORM\Column(name="visit_day", type="datetime")
+     * @Assert\DateTime()
      */
     private $visitDay;
 
@@ -39,28 +41,28 @@ class Order
     /**
      * @var int
      *
-     * @ORM\Column(name="ticket_quantity", type="integer")
+     * @ORM\Column(name="ticket_quantity", type="integer", nullable=true)
      */
     private $ticketQuantity;
 
     /**
      * @var \DateTime
      *
-     * @ORM\Column(name="ordered_at", type="datetime")
+     * @ORM\Column(name="ordered_at", type="datetime", nullable=true)
      */
     private $orderedAt;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="num", type="integer")
+     * @ORM\Column(name="num", type="integer", nullable=true)
      */
     private $num;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="total_price", type="decimal", precision=8, scale=2)
+     * @ORM\Column(name="total_price", type="decimal", precision=8, scale=2, nullable=true)
      */
     private $totalPrice;
 
@@ -68,13 +70,19 @@ class Order
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *    message = "L'email '{{ value }}' n'est pas un email valide.",
+     *    checkMX = true
+     * )
      */
     private $email;
 
     /**
      * @var array
      * One Order has Many Tickets.
-     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order", cascade={"persist"})
+     * @Assert\Valide 
      */
     private $tickets;
 

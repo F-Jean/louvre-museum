@@ -37,16 +37,18 @@ framework:
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    form_themes:
+        - 'bootstrap_3_layout.html.twig'
 
 # Doctrine Configuration
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: '%database_host%'
-        port: '%database_port%'
-        dbname: '%database_name%'
-        user: '%database_user%'
-        password: '%database_password%'
+        host: '127.0.0.1'
+        port: '~'
+        dbname: 'louvre-museum'
+        user: 'root'
+        password: '3A30d0_3919&Ceé748E%'
         charset: UTF8
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
