@@ -1,10 +1,13 @@
 <?php
 
+// src/AppBundle/Entity/Order.php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+
 
 /**
  * Order
@@ -82,7 +85,7 @@ class Order
      * @var array
      * One Order has Many Tickets.
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order", cascade={"persist"})
-     * @Assert\Valide 
+     * @Assert\Valid()
      */
     private $tickets;
 

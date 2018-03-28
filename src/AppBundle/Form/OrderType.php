@@ -1,5 +1,7 @@
 <?php
 
+// src/AppBundle/Form/OrderType.php
+
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Order;
@@ -21,19 +23,24 @@ class OrderType extends AbstractType
     {
         $builder
           ->add('visitDay',   DateType::class, array(
+            'label' => 'Jour de la visite',
             'widget' => 'single_text',
             'format' => 'dd-MM-yyyy',
           ))
           ->add('type',       ChoiceType::class, array (
+            'label' => 'Type de billet',
             'choices' => array(
               'Journée' => 1,
               'Demi-journée' => 2)))
-          ->add('email',      EmailType::class)
+          ->add('email',      EmailType::class, array (
+            'label' => 'Email',
+          ))
 
           /* argument1 : name of the field "tickets", because it's the attribute's name
              arg2 : type of the field "CollectionType" that construct a collection, a list
              arg3 : field's option's array */
           ->add('tickets',    CollectionType::class, array(
+            'label' => false,
             'entry_type'    => TicketType::class, // entry_type the form create a list of TicketType
             'allow_add'     => true,
             'allow_delete'  => true,

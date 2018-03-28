@@ -516,5 +516,11 @@ ul.social-buttons {
       background-color: #fed136; }
 
 /*!
- * My settings
- */
+ * Custom styles
+
+
+#sideNavbar {
+  position: fixed;
+  top: 800px;
+}
+*/

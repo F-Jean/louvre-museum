@@ -32,7 +32,7 @@ class OrderController extends Controller
       $em->flush();
 
       $this->addFlash('notice', 'Commande réussie');
-      return $this->redirect("homepage");
+      //return $this->redirect("homepage");
     }
 
     /*We carry out the method createView() of the form to the view
