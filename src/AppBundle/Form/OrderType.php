@@ -22,19 +22,42 @@ class OrderType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('visitDay',   DateType::class, array(
-            'label' => 'Jour de la visite',
-            'widget' => 'single_text',
-            'format' => 'dd-MM-yyyy',
-          ))
+        ->add('visitDay',     DateType::class, [
+              'label' => 'Date de publication :',
+              'widget' => 'single_text',
+              'format' => 'dd/MM/yyyy',
+              'attr' => [
+                  'class' => 'datetimepicker input_validation',
+              ],
+              'invalid_message' => 'Veuillez saisir une date au bon format.',
+          ])
           ->add('type',       ChoiceType::class, array (
             'label' => 'Type de billet',
             'choices' => array(
               'Journée' => 1,
-              'Demi-journée' => 2)))
+              'Demi-journée' => 2),
+            'attr' => [
+                'data-rules' => json_encode([
+                  'required' => true,
+                  'regex' => "^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$"
+                ]),
+                'data-messages' => json_encode([
+                  'required' => "Veuillez sélectionner une date.",
+                  'regex' => "Veuillez saisir une date valide."
+                ]),
+                'class' => 'input_validation'
+            ]))
           ->add('email',      EmailType::class, array (
             'label' => 'Email',
-          ))
+            'attr' => [
+                'data-rules' => json_encode([
+                    'email' => true,
+                  ]),
+                'data-messages' => json_encode([
+                    'email' => 'Veuillez saisir une adresse email.',
+                  ]),
+                'class' => 'input_validation'
+            ]))
 
           /* argument1 : name of the field "tickets", because it's the attribute's name
              arg2 : type of the field "CollectionType" that construct a collection, a list

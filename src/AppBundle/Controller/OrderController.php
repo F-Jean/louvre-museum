@@ -23,16 +23,20 @@ class OrderController extends Controller
 
     // Create the FormBuilder via the form factory's service
     $form = $this->createForm(OrderType::class, $order);
-    /* If the method is POST, carry out the link between Request <-> Form, the variable
-    $order contains the values entered in the form by the user */
-    if ($request->isMethod('POST') && $form->handleRequest($request)->isValid()) {
+
+    //
+    $form ->handleRequest($request);
+
+    if ($form->isSubmitted() && $form->isValid()) {
+      $order = $form->getData();
+
       //Saving of $order in database
       $em = $this->getDoctrine()->getManager();
       $em->persist($order);
       $em->flush();
 
       $this->addFlash('notice', 'Commande réussie');
-      //return $this->redirect("homepage");
+      return $this->redirectToRoute("homepage");
     }
 
     /*We carry out the method createView() of the form to the view

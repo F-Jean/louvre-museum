@@ -42,8 +42,8 @@ section {
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 section .section-ticket {
-  padding-left: 280px;
-  padding-top: 35px;
+  /*padding-left: 280px;*/
+  padding-top: 71px;
 }
 
 @media (min-width: 768px) {
@@ -515,12 +515,53 @@ ul.social-buttons {
     ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
       background-color: #fed136; }
 
-/*!
- * Custom styles
+/* Custom styles */
 
-
-#sideNavbar {
-  position: fixed;
-  top: 800px;
+section .section-ticket {
+  margin-left: -260px;
+  margin-right: -260px;
+  padding-left: 161px;
 }
-*/
+
+div#day {
+  border: 2px solid grey;
+}
+
+div#half-day {
+  border: 2px solid grey;
+  margin-left: 199px;
+}
+
+div#day-closed {
+  margin-top: 50px;
+  margin-bottom: -100px;
+}
+
+button#buy {
+  margin-top: 20px;
+}
+
+div#ticket-tunnel {
+  margin-left: -260px;
+  margin-right: -260px;
+}
+
+div.ticket-form {
+  border: 1px solid grey;
+  margin-left: 60px;
+  margin-top: 30px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+div.sub-btn {
+  margin-top: 60px;
+}
+
+button.add_ticket {
+  margin-left: 35px;
+}
+
+button.previous {
+  margin-left: 35px;
+}

@@ -30,7 +30,7 @@ class Ticket
      * @ORM\Column(name="first_name", type="string", length=255)
      * @Assert\Length(
      *    min = 2,
-     *    minMessage = "Votre prénom doit contenir au moins {{ limit }} lettres"
+     *    minMessage = "Votre nom doit contenir au moins {{ limit }} lettres"
      * )
      * @Assert\NotBlank()
      */

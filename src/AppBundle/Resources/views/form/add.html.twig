@@ -4,22 +4,31 @@
 <button type="button" href="#command-tunnel" class="btn btn-warning" data-toggle="collapse" id="buy">Acheter un billet</button>
 
 <div class="collapse" id="command-tunnel">
-    <div id="order-form">
-        {{ form_start(form) }}
-        {{ form_errors(form) }}
-        {{ form_row(form.visitDay) }}
-        {{ form_row(form.type) }}
-        {{ form_row(form.email) }}
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div id="order-form" class="step1">
+        <div class="form-row">
+            <div class="col-md-4" id="visitDay">
+                {{ form_row(form.visitDay) }}
+            </div>
+            <div class="form-group col-md-4" id="type">
+                {{ form_row(form.type) }}
+            </div>
+            <div class="form-group col-md-4" id="email">
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+        <button type="button" href="#" class="show_order btn btn-warning">Continuer</button>
     </div>
-    <button type="button" href="#" class="show_order btn btn-warning">Continuer</button>
-    <div id="ticket-tunnel">
+    <div id="ticket-tunnel" class="row" data-index"{{ form.tickets|length == 0 ? 0 : form.tickets|last.vars.name+1 }}" data-prototype="{{ include("AppBundle:form:prototype.html.twig", {form:form.tickets.vars.prototype})|e('html_attr') }}">
         {% for ticket in form.tickets %}
-            {{ include("AppBundle:form:prototype.html.twig") }}
+            {{ include("AppBundle:form:prototype.html.twig", {form:ticket }) }}
         {% endfor %}
     </div>
-    <button type="submit" class="cart btn btn-warning">Continuer</button>
+    <div class="sub-btn">
+          <button type="submit" class="cart btn btn-warning">Continuer</button>
+          <button type="button" href="#" class="add_ticket btn btn-warning">Ajouter un billet</button>
+          <button type="button" href="#" class="previous btn btn-warning">Retour</button>
+    </div>
     {{ form_end(form) }}
-    <button type="button" href="#" class="add_ticket btn btn-warning">Ajouter un billet</button>
-    <button type="button" href="#" class="delete_ticket btn btn-warning">Supprimer billet</button>
-    <button type="button" href="#" class="previous btn btn-warning">Retour</button>
 </div>

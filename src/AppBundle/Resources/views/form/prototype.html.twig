@@ -2,10 +2,11 @@
 
 <!-- Ticket's form -->
 
-<div id="ticket-form">
+<div class="ticket-form col-md-3">
     {{ form_row(form.firstName) }}
     {{ form_row(form.lastName) }}
     {{ form_row(form.country) }}
     {{ form_row(form.birthdayDate) }}
     {{ form_row(form.reducedPrice) }}
+    <button type="button" href="#" class="delete_ticket btn btn-warning">Supprimer billet</button>
 </div>

@@ -22,6 +22,17 @@ class TicketType extends AbstractType
         $builder
           ->add('firstName',    TextType::class, array (
             'label' => 'Nom',
+            'attr' => [
+                'data-rules' => json_encode([
+                    'required' => true,
+                    'minlength' => '2'
+                  ]),
+                'data-messages' => json_encode([
+                    'required' => 'Veuillez remplir ce champ',
+                    'minlength' => 'Votre nom doit contenir au moins 2 lettres'
+                  ]),
+                'class' => 'input_validation'
+              ]
           ))
           ->add('lastName',     TextType::class, array (
             'label' => 'Prénom',

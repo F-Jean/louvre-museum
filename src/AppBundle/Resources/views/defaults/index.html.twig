@@ -4,10 +4,16 @@
     <!-- Services -->
 <section id="services">
     <div class="container">
-        <div class="row">
-            <div class="col-lg-12">
-                <div class="col-lg-12 text-center">
-                    <h2 class="section-heading text-uppercase">Nos produits</h2>
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center">
+                    <!-- Display a success flash message if form is successfully validate -->
+                    {% for message in app.flashes('notice') %}
+                        <div class="flash-notice">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                    <h2 class="section-heading text-uppercase">Commande en ligne</h2>
                     {{ include("AppBundle:form:add.html.twig", { form: form }) }}
                 </div>
                 <div class="section-ticket">
@@ -27,6 +33,10 @@
                             </span>
                             <h4 class="service-heading">Billet demi-journée</h4>
                             <p class="text-muted">Attention, ne permet de rentrer qu’à partir de 14h00.</p>
+                        </div>
+                        <div class="col-md-12" id="day-closed">
+                            <p class="text-muted"><span class="glyphicon glyphicon-minus-sign"></span>Attention, le musée est fermé les mardis ainsi que les 1er mai, 1er novembre et 25 décembre.</br>
+                            Nous rappelons également qu'il n'est pas possible de réserver de billet les dimanches.</p>
                         </div>
                     </div>
                 </div>
@@ -50,7 +60,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="section-heading text-uppercase">A Propos du Musée</h2>
+                <h2 class="section-heading text-uppercase">À Propos du Musée</h2>
                 <h3 class="section-subheading text-muted">Besoin d'information</h3>
             </div>
         </div>

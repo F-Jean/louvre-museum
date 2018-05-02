@@ -7,6 +7,7 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
 
 /**
@@ -86,6 +87,10 @@ class Order
      * One Order has Many Tickets.
      * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order", cascade={"persist"})
      * @Assert\Valid()
+     * @Assert\Count(
+     *    min=1,
+     *    minMessage = "Vous devez remplir au moins 1 billet"
+     *)
      */
     private $tickets;
 
@@ -135,6 +140,25 @@ class Order
     public function getVisitDay()
     {
         return $this->visitDay;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload) {
+      $visitDay = new \DateTime();
+
+      $holidays = [
+          \DateTime::createFromFormat("m-d H:i:s", "5-1 00:00:00"),
+          \DateTime::createFromFormat("m-d H:i:s", "11-1 00:00:00"),
+          \DateTime::createFromFormat("m-d H:i:s", "12-25 00:00:00")
+      ];
+
+      if(in_array($visitDay->format("N"), [2, 7]) || in_array($visitDay, $holidays)) {
+          echo "pas de commande ce jour la";
+      }else{
+          echo "OK";
+      }
     }
 
     /**
