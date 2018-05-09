@@ -161,6 +161,19 @@ class Order
       }
     }
 
+    /* Pas de réservation possible le mardi, le dimanche et 1er mai, 1nov, 25dec
+       Pas de réservation jour ou 1000 billets vendus
+       Pas de billet journée après 14h pourle jour même
+    $halfDay = \DateTime::createFromFormat("H:i:s", "13:59:59");
+
+    if(in_array($visitDay->format("N"), [2, 7]) || in_array($visitDay, $holidays)) {
+        echo "Pas de commande ce jour là";
+    }elseif($visitDay > $halfDay) {
+        echo "Pas de billet journée après 14h";
+    }else{
+        echo "OK";
+    }*/
+
     /**
      * Set ticketQuantity
      *

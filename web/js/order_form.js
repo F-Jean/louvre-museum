@@ -7,10 +7,14 @@ $(function() {
         //
         $('.add_ticket').hide();
         $('.delete_ticket').hide();
-        $('.previous').hide();
         $('.cart').hide();
         $('#buy').hide();
         $('#sideNavbar').show();
+        $(".input_validation").each(function() {
+            var rules = $(this).data("rules");
+            var messages = $(this).data("messages");
+            $(this).rules("add", Object.assign(rules, { messages : messages }))
+        })
     });
 
     // Call the datepicker of Order form
@@ -19,52 +23,41 @@ $(function() {
         todayBtn: "linked",
         language: "fr",
         orientation: "bottom left",
-        daysOfWeekDisabled: "0,2",
+        // daysOfWeekDisabled: "0,2",
         todayHighlight: true
     });
 
-
     // Validate the fields of the first step after clicking the Continue btn
+    var validator = $("form[name=appbundle_order]").validate({
+        validClass: 'is-valid',
+        errorClass: 'is-invalid',
+        errorElement: 'div',
+        errorPlacement: function(error, e) {
+            error.addClass("invalid-feedback");
+            e.parents('.form-group').append(error);
+        },
+        highlight: function(e) {
+            $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
+        },
+        success: function(e) {
+            e.closest('.form-group').removeClass('has-success has-error');
+            e.closest('.invalid-feedback').remove();
+        },
+        rules: {},
+        messages: {}
+    });
 
-    function reload_Validation() {
-      var rules = {}
-
-      var messages = {}
-      $(".imput_validation").each(function() {
-          var name = $(this).attr("name");
-          rules[name] = $(this).data("rules");
-          messages[name] = $(this).data("messages");
-      })
-
-      $("form[name=appbundle_order]").validate({
-          validClass: 'is-valid',
-          errorClass: 'is-invalid',
-          errorElement: 'div',
-          errorPlacement: function(error, e) {
-              error.addClass("invalid-feedback");
-              e.parents('.form-group').append(error);
-          },
-          highlight: function(e) {
-              $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-          },
-          success: function(e) {
-              e.closest('.form-group').removeClass('has-success has-error');
-              e.closest('.invalid-feedback').remove();
-          },
-
-          rules: rules,
-          messages: messages
-      });
-    }
-
-    reload_Validation();
 
     $("body").on("click", ".show_order", function(e) {
-        $("form[name=appbundle_order]").validate();
-        if(!$("form[name=appbundle_order]").valid()) {
-           e.preventDefault();
+        if(!validator.valid()) {
+            e.preventDefault();
         } else {
-
+            $(this).hide();
+            $('.add_ticket').show();
+            $('.delete_ticket').show();
+            $('.cart').show();
+            // Add a new order form
+            addOrderForm($collectionHolder, $newOrderLi);
         }
     });
 
@@ -83,17 +76,6 @@ $(function() {
     when inserting a new item */
     $collectionHolder.data('index', $collectionHolder.find('div').length);
 
-    $('.show_order').click(function(e) {
-        // Prevent the link form creating a "#" on the URL
-        e.preventDefault();
-        $('#order-form').hide();
-        $('.add_ticket').show();
-        $('.delete_ticket').show();
-        $('.previous').show();
-        $('.cart').show();
-        // Add a new order form
-        addOrderForm($collectionHolder, $newOrderLi);
-    });
 
     $('.add_ticket').click(function(e) {
         e.preventDefault();
@@ -111,14 +93,40 @@ $(function() {
 
         var newForm = prototype;
 
-        /* Replace '__name__' in the prototype's HTML to
+        /* Replace '_name_' in the prototype's HTML to
         instead be a number based on how many items we have */
         newForm = newForm.replace(/__name__/g, index);
+
+        var $newForm = $(newForm)
         // Increase the item with one for the next item
         $collectionHolder.data('index', index + 1);
 
-        $collectionHolder.append(newForm);
+        $collectionHolder.append($newForm);
+
+        $newForm.find(".input_validation").each(function() {
+            var rules = $(this).data("rules");
+            var messages = $(this).data("messages");
+            $(this).rules("add", Object.assign(rules, { messages : messages }))
+        })
     }
+
+    $("body").on("click", ".delete_ticket", function() {
+        $(this).closest(".ticket-form").find(".input_validation").each(function() {
+            $(this).rules("remove");
+        })
+        $(this).closest(".ticket-form").remove();
+    });
+
+    // Display an alert if reducedPrice is checked
+    function verifychk(cb) {
+        if(cb.checked == true) {
+            alert('Un justificatif sera demandé lors de l\'entrée');
+        }else{
+            alert('Vous venez de décocher tarif réduit');
+        }
+    }
+
+
 });
 /*
 // Hide sideNavbar

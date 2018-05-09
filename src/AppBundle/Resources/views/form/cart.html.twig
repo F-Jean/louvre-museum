@@ -1,0 +1,50 @@
+{# src/AppBundle/Resources/views/form/cart.html.twig #}
+
+<div id="cart-form">
+    <div class="form-row">
+        <div class="col-md-12" id="orderedAt">
+            <label>Date de la commande : </label>
+            {{ order.orderedAt }}
+        </div>
+        <div class="col-md-12" id="visithay">
+            <label>Date de la visite : </label>
+            {{ order.visitDay }}
+        </div>
+        <div class="col-md-12" id="email">
+            <label>Adresse email : </label>
+            {{ order.email }}
+        </div>
+        <div class="col-md-12" id="ticketQuantity">
+            <label>Total billet(s) d'entrée : </label>
+            {{ order.ticketQuantity }}
+        </div>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Quantité</th>
+                    <th>Type de billet</th>
+                    <th>Identité</th>
+                    <th>Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{ order.ticketQuantity }}</td>
+                        <td>{{ order.TicketType }}</td>
+                    </tr>
+                {% endfor %}
+                {% for ticket in tickets %}
+                    <tr>
+                        <td>{{ ticket.firstName }}</td>
+                    </tr>
+                {% endfor %}
+                <tr>
+                    <td>{{ order.totalPrice }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <button type="button" href="#" class="pay btn btn-warning">Payer</button>
+    <button type="button" href="#" class="previous btn btn-warning">Retour</button>
+</div>

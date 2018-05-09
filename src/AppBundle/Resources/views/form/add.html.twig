@@ -11,10 +11,10 @@
             <div class="col-md-4" id="visitDay">
                 {{ form_row(form.visitDay) }}
             </div>
-            <div class="form-group col-md-4" id="type">
+            <div class="col-md-4" id="type">
                 {{ form_row(form.type) }}
             </div>
-            <div class="form-group col-md-4" id="email">
+            <div class="col-md-4" id="email">
                 {{ form_row(form.email) }}
             </div>
         </div>
@@ -26,9 +26,13 @@
         {% endfor %}
     </div>
     <div class="sub-btn">
-          <button type="submit" class="cart btn btn-warning">Continuer</button>
+          <button type="submit" class="cart btn btn-warning">Panier</button>
           <button type="button" href="#" class="add_ticket btn btn-warning">Ajouter un billet</button>
-          <button type="button" href="#" class="previous btn btn-warning">Retour</button>
     </div>
+    {# <div id="cart-tunnel" class="row">
+        {% for order in orders %}
+            {% include "AppBundle:form:cart.html.twig" with {"order": order} %}
+        {% endfor %}
+    </div> #}
     {{ form_end(form) }}
 </div>

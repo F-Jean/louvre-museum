@@ -23,11 +23,11 @@ class OrderType extends AbstractType
     {
         $builder
         ->add('visitDay',     DateType::class, [
-              'label' => 'Date de publication :',
+              'label' => 'Date de la visite :',
               'widget' => 'single_text',
               'format' => 'dd/MM/yyyy',
               'attr' => [
-                  'class' => 'datetimepicker input_validation',
+                  'class' => 'datetimepicker',
               ],
               'invalid_message' => 'Veuillez saisir une date au bon format.',
           ])
