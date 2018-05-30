@@ -7,6 +7,9 @@
     {{ form_row(form.lastName) }}
     {{ form_row(form.country) }}
     {{ form_row(form.birthdayDate) }}
-    {{ form_row(form.reducedPrice) }}
+    <div class="form-group">
+        {{ form_widget(form.reducedPrice) }}
+        <a class="chk-popover" data-trigger="hover" data-placement="bottom" data-toggle="popover" data-content="Un justificatif sera demandé lors de l'entrée" ><i class="text-warning fa fa-exclamation-triangle" > Important!</i></a>
+    </div>
     <button type="button" href="#" class="delete_ticket btn btn-warning">Supprimer billet</button>
 </div>

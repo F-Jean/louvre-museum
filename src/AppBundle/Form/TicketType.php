@@ -48,9 +48,7 @@ class TicketType extends AbstractType
           ->add('reducedPrice', CheckboxType::class, array(
             'label' => 'Réduction',
             'required' => false,
-            'attr' => [
-                'onchange' => 'verifychk(this)'
-            ]));
+          ));
     }
 
     /**

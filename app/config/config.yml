@@ -44,12 +44,12 @@ twig:
 doctrine:
     dbal:
         driver: pdo_mysql
-        host: '127.0.0.1'
+        host: localhost
         port: '~'
-        dbname: 'louvre-museum'
+        dbname: '~'
         user: 'root'
-        password: '3A30d0_3919&Ceé748E%'
-        charset: UTF8
+        password: '~'
+        charset: '~'
         # if using pdo_sqlite as your database driver:
         #   1. add the path in parameters.yml
         #     e.g. database_path: '%kernel.project_dir%/var/data/data.sqlite'

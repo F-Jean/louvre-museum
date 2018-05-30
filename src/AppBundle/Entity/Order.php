@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use AppBundle\Validator\Contraints;
 
 
 /**
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
  *
  * @ORM\Table(name="shop_order")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Shop_orderRepository")
+ * @Contraints\ThousandTicketsValidator
  */
 class Order
 {
@@ -43,17 +45,11 @@ class Order
     private $type;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ticket_quantity", type="integer", nullable=true)
-     */
-    private $ticketQuantity;
-
-    /**
      * @var \DateTime
      *
      * @ORM\Column(name="ordered_at", type="datetime", nullable=true)
      */
+
     private $orderedAt;
 
     /**
@@ -146,7 +142,6 @@ class Order
      * @Assert\Callback
      */
     public function validate(ExecutionContextInterface $context, $payload) {
-      $visitDay = new \DateTime();
 
       $holidays = [
           \DateTime::createFromFormat("m-d H:i:s", "5-1 00:00:00"),
@@ -154,25 +149,12 @@ class Order
           \DateTime::createFromFormat("m-d H:i:s", "12-25 00:00:00")
       ];
 
-      if(in_array($visitDay->format("N"), [2, 7]) || in_array($visitDay, $holidays)) {
+      if(in_array($this->visitDay->format("N"), [2, 7]) || in_array($this->visitDay, $holidays)) {
           echo "pas de commande ce jour la";
       }else{
           echo "OK";
-      }
+      }exit;
     }
-
-    /* Pas de réservation possible le mardi, le dimanche et 1er mai, 1nov, 25dec
-       Pas de réservation jour ou 1000 billets vendus
-       Pas de billet journée après 14h pourle jour même
-    $halfDay = \DateTime::createFromFormat("H:i:s", "13:59:59");
-
-    if(in_array($visitDay->format("N"), [2, 7]) || in_array($visitDay, $holidays)) {
-        echo "Pas de commande ce jour là";
-    }elseif($visitDay > $halfDay) {
-        echo "Pas de billet journée après 14h";
-    }else{
-        echo "OK";
-    }*/
 
     /**
      * Set ticketQuantity

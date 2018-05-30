@@ -23,7 +23,7 @@ $(function() {
         todayBtn: "linked",
         language: "fr",
         orientation: "bottom left",
-        // daysOfWeekDisabled: "0,2",
+        daysOfWeekDisabled: "0,2",
         todayHighlight: true
     });
 
@@ -59,6 +59,15 @@ $(function() {
             // Add a new order form
             addOrderForm($collectionHolder, $newOrderLi);
         }
+    });
+
+
+    /* Verify imput date in visitDay's field doesn't match a date where 1000 tickets are sold
+    CHECK IT before clicking on Continue btn. */
+    $('#appbundle_order_visitDay').on("click", ".show_order", function(e) {
+      $.validator.addMethod("date", function(value, element) {
+        return this.optional(element) || 
+      })
     });
 
     // Command tunnel starts
@@ -102,7 +111,7 @@ $(function() {
         $collectionHolder.data('index', index + 1);
 
         $collectionHolder.append($newForm);
-
+        $("a.chk-popover").popover()
         $newForm.find(".input_validation").each(function() {
             var rules = $(this).data("rules");
             var messages = $(this).data("messages");
@@ -117,17 +126,8 @@ $(function() {
         $(this).closest(".ticket-form").remove();
     });
 
-    // Display an alert if reducedPrice is checked
-    function verifychk(cb) {
-        if(cb.checked == true) {
-            alert('Un justificatif sera demandé lors de l\'entrée');
-        }else{
-            alert('Vous venez de décocher tarif réduit');
-        }
-    }
-
-
-});
+    $("a.chk-popover").popover()
+    });
 /*
 // Hide sideNavbar
 $(function() {
