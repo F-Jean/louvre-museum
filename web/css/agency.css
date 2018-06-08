@@ -181,7 +181,10 @@ header.masthead {
 
 .service-heading {
   margin: 15px 0;
-  text-transform: none; }
+  text-transform: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;}
 
 #portfolio .portfolio-item {
   right: 0;
@@ -561,6 +564,20 @@ div.sub-btn {
 button.add_ticket {
   margin-left: 35px;
 }
+
+.service-heading-day {
+  margin: 15px 0;
+  text-transform: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;}
+
+  .service-heading-half-day {
+    margin: 15px 0;
+    text-transform: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;}
 
 /*button.previous {
   margin-left: 35px;

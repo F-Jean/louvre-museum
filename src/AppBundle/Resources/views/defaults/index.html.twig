@@ -19,25 +19,45 @@
                 <div class="section-ticket">
                     <div class="row text-center" id="form-ticket">
                         <div class="col-md-4" id="day">
-                            <span class="fa-stack fa-4x">
+                            <div class="row" id="day-prices">
+                                <h4>Billet journée :</h4>
+                                <ul>
+                                    <li>Moins de 4 ans : entrée gratuite</li>
+                                    <li>De 4 ans à 12 ans : 8€</li>
+                                    <li>A partir de 12 ans : 16€</li>
+                                    <li>A partir de 60 ans : 12€</li>
+                                </ul>
+                            </div>
+                            <span class="fa-stack fa-4x" id="day-span">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <h4 class="service-heading">Billet journée</h4>
-                            <p class="text-muted">Ouvert de 9h à 18h. </br>(fermeture des salles à partir de 17h30)</p>
+                            </span><br>
+                            <a class="service-heading-day" href="#">Tarif billet journée</a>
+                            <p class="text-muted" id="day-text">Ouvert de 9h à 18h. </br>(fermeture des salles à partir de 17h30)</p>
                         </div>
                         <div class="col-md-4" id="half-day">
-                            <span class="fa-stack fa-4x">
+                            <div class="row" id="half-day-prices">
+                                <h4>Billet demi-journée :</h4>
+                                <ul>
+                                    <li>Moins de 4 ans : entrée gratuite</li>
+                                    <li>De 4 ans à 12 ans : 4€</li>
+                                    <li>A partir de 12 ans : 8€</li>
+                                    <li>A partir de 60 ans : 6€</li>
+                                </ul>
+                            </div>
+                            <span class="fa-stack fa-4x" id="half-day-span">
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
-                            </span>
-                            <h4 class="service-heading">Billet demi-journée</h4>
-                            <p class="text-muted">Attention, ne permet de rentrer qu’à partir de 14h00.</p>
+                            </span><br>
+                            <a class="service-heading-half-day" href="#">Tarif billet demi-journée</a>
+                            <p class="text-muted" id="half-day-text">Attention, ne permet de rentrer qu’à partir de 14h00.</p>
                         </div>
-                        <div class="col-md-12" id="day-closed">
-                            <p class="text-muted"><span class="glyphicon glyphicon-minus-sign"></span>Attention, le musée est fermé les mardis ainsi que les 1er mai, 1er novembre et 25 décembre.</br>
-                            Nous rappelons également qu'il n'est pas possible de réserver de billet les dimanches.</p>
-                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row text-center" id="day-closed">
+                        <p class="text-muted"><span class="glyphicon glyphicon-minus-sign"></span>Attention, le musée est fermé les mardis ainsi que les 1er mai, 1er novembre et 25 décembre.</br>
+                        Nous rappelons également qu'il n'est pas possible de réserver de billet les dimanches.</p>
                     </div>
                 </div>
             </div>
@@ -67,21 +87,21 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="img/team/1.jpg" alt="">
+                    <img class="mx-auto rounded-circle" src="img/team/history.jpg" alt="Louvre museum">
                     <h4>Son Histoire</h4>
                     <a href="#" class="text-muted">Entrer</a>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="img/team/2.jpg" alt="">
+                    <img class="mx-auto rounded-circle" src="img/team/expos.jpg" alt="Some paintings">
                     <h4>Expositions</h4>
                     <a href="#" class="text-muted">Entrer</a>
                 </div>
             </div>
             <div class="col-sm-4">
                 <div class="team-member">
-                    <img class="mx-auto rounded-circle" src="img/team/3.jpg" alt="">
+                    <img class="mx-auto rounded-circle" src="img/team/infos.jpg" alt="Informations">
                     <h4>Infos Pratiques</h4>
                     <a href="#" class="text-muted">Entrer</a>
                 </div>

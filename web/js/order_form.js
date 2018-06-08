@@ -1,4 +1,20 @@
 $(function() {
+    // Hide & show prices of command tunnel
+    $('#day-prices').hide();
+    $('#half-day-prices').hide();
+    $('.service-heading-day').click(function(e) {
+        $('#day-span').remove();
+        $('.service-heading-day').remove();
+        $('#day-text').remove();
+        $('#day-prices').show();
+    });
+    $('.service-heading-half-day').click(function(e) {
+      $('#half-day-span').remove();
+      $('.service-heading-half-day').remove();
+      $('#half-day-text').remove();
+      $('#half-day-prices').show();
+    });
+
     // Hide & show the buttons before starting the command tunnel
     $('#buy').click(function(e) {
         e.preventDefault()
@@ -10,43 +26,40 @@ $(function() {
         $('.cart').hide();
         $('#buy').hide();
         $('#sideNavbar').show();
-        $(".input_validation").each(function() {
-            var rules = $(this).data("rules");
-            var messages = $(this).data("messages");
-            $(this).rules("add", Object.assign(rules, { messages : messages }))
-        })
-    });
-
-    // Call the datepicker of Order form
-    $('#appbundle_order_visitDay').datepicker({
-        format: "dd/mm/yyyy",
-        todayBtn: "linked",
-        language: "fr",
-        orientation: "bottom left",
-        daysOfWeekDisabled: "0,2",
-        todayHighlight: true
+        $('#appbundle_order_visitDay').datepicker({
+            format: "dd/mm/yyyy",
+            todayBtn: "linked",
+            language: "fr",
+            orientation: "bottom left",
+            daysOfWeekDisabled: "0,2",
+            todayHighlight: true
+        }).on('changeDate', function(){
+          console.log(validator.element(this));
+        });
     });
 
     // Validate the fields of the first step after clicking the Continue btn
-    var validator = $("form[name=appbundle_order]").validate({
-        validClass: 'is-valid',
-        errorClass: 'is-invalid',
-        errorElement: 'div',
-        errorPlacement: function(error, e) {
-            error.addClass("invalid-feedback");
-            e.parents('.form-group').append(error);
-        },
-        highlight: function(e) {
-            $(e).closest('.form-group').removeClass('has-success has-error').addClass('has-error');
-        },
-        success: function(e) {
-            e.closest('.form-group').removeClass('has-success has-error');
-            e.closest('.invalid-feedback').remove();
-        },
-        rules: {},
-        messages: {}
-    });
+    var formValidation = {
+      validClass:     'is-valid',
+      errorClass:     'is-invalid',
+      errorElement:   'div',
+      errorPlacement: function(error, e) {
+          error.addClass("invalid-feedback");
+          e.parents('.form-group').append(error);
+      },
+      success: function(e) {
+          e.closest('.invalid-feedback').remove();
+      },
+     rules: {},
+     messages: {}
+  };
 
+  $(this).find("input, select, textarea").each(function() {
+     formValidation.rules[$(this).attr("name")] = $(this).data("rules");
+     formValidation.messages[$(this).attr("name")] = $(this).data("messages");
+  });
+
+  $("form[name=appbundle_order").validate(formValidation);
 
     $("body").on("click", ".show_order", function(e) {
         if(!validator.valid()) {
@@ -61,14 +74,24 @@ $(function() {
         }
     });
 
-
-    /* Verify imput date in visitDay's field doesn't match a date where 1000 tickets are sold
-    CHECK IT before clicking on Continue btn. */
-    $('#appbundle_order_visitDay').on("click", ".show_order", function(e) {
-      $.validator.addMethod("date", function(value, element) {
-        return this.optional(element) || 
-      })
-    });
+    /* Check the imput date in visitDay's field doesn't match a date where
+    1000 tickets are already sold */
+    $.validator.addMethod('visitDay_with_1000_tickets',
+        function (value, element) {
+            var validate = true;
+            $.ajax({
+              url: '/app_dev.php/validate',
+              type: 'POST',
+              data: {date:value},
+              async:false,
+              success: function(response){
+                validate=response
+              }
+            })
+            return validate;
+        },
+        'Plus de reservation pour ce jour !'
+    );
 
     // Command tunnel starts
     var $collectionHolder;

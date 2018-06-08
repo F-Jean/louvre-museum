@@ -27,6 +27,10 @@ class OrderType extends AbstractType
               'widget' => 'single_text',
               'format' => 'dd/MM/yyyy',
               'attr' => [
+                'data-rules' => json_encode([
+                  'required' => true,
+                  'visitDay_with_1000_tickets' => true
+                ]),
                   'class' => 'datetimepicker',
               ],
               'invalid_message' => 'Veuillez saisir une date au bon format.',

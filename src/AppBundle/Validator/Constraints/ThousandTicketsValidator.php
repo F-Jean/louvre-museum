@@ -14,13 +14,13 @@ use Entity\Ticket;
   */
  class ThousandTicketsValidator extends ConstraintValidator {
 
+   private $entityManager;
+   public function __construct(EntityManagerInterface $entityManager) {
+     $this->entityManager = $entityManager;
+   }
+
    // $protocol car on cible une classe
    public function validate($protocol, Constraint $constraint) {
-
-     $entityManager;
-     function __construct(EntityManagerInterface $entityManager) {
-       $this->entityManager = $entityManager;
-     }
 
      // $protocol -> Order
      if($this->entityManager->getRepository(Ticket::class)->countTicketsByVisitDay($protocol->getVisitDay()) + count($protocol->getTickets()) > 1000){

@@ -45,6 +45,11 @@ class OrderController extends Controller
       'form' => $form->createView(),
     ));
   }
+
+  public function validateAction(Request $request) {
+    var_dump($request->request->get('date'));
+    return $this->json(true);
+  }
 }
 
 /* Rappel FORMULAIRE SYMFONY
