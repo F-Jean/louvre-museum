@@ -3,6 +3,39 @@
 {% block container %}
     <!-- Services -->
 <section id="services">
+    <div class="sidebar" id="sidebar-cart">
+        <div class="col-md 12 col-sm-4 col-xs-2">
+            <div class="left-sticky">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Tarifs</th>
+                            <th>Qté</th>
+                            <th>Total</th>
+                        </tr>
+                        <tr>
+                            <td>- 4 ans :</td>
+                        </tr>
+                        <tr>
+                            <td>Enfant :</td>
+                        </tr>
+                        <tr>
+                            <td>Normal :</td>
+                        </tr>
+                        <tr>
+                            <td>Senior :</td>
+                        </tr>
+                        <tr>
+                            <td>Reduit :</td>
+                        </tr>
+                        <tr>
+                            <td>Total :</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-8">
@@ -21,7 +54,7 @@
                         <div class="col-md-4" id="day">
                             <div class="row" id="day-prices">
                                 <h4>Billet journée :</h4>
-                                <ul>
+                                <ul id="d-prices">
                                     <li>Moins de 4 ans : entrée gratuite</li>
                                     <li>De 4 ans à 12 ans : 8€</li>
                                     <li>A partir de 12 ans : 16€</li>
@@ -32,13 +65,13 @@
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                             </span><br>
-                            <a class="service-heading-day" href="#">Tarif billet journée</a>
+                            <a class="service-heading-day" href="#services">Tarif billet journée</a>
                             <p class="text-muted" id="day-text">Ouvert de 9h à 18h. </br>(fermeture des salles à partir de 17h30)</p>
                         </div>
                         <div class="col-md-4" id="half-day">
                             <div class="row" id="half-day-prices">
                                 <h4>Billet demi-journée :</h4>
-                                <ul>
+                                <ul id="hd-prices">
                                     <li>Moins de 4 ans : entrée gratuite</li>
                                     <li>De 4 ans à 12 ans : 4€</li>
                                     <li>A partir de 12 ans : 8€</li>
@@ -49,30 +82,18 @@
                                 <i class="fa fa-circle fa-stack-2x text-primary"></i>
                                 <i class="fa fa-shopping-cart fa-stack-1x fa-inverse"></i>
                             </span><br>
-                            <a class="service-heading-half-day" href="#">Tarif billet demi-journée</a>
+                            <a class="service-heading-half-day" href="#services">Tarif billet demi-journée</a>
                             <p class="text-muted" id="half-day-text">Attention, ne permet de rentrer qu’à partir de 14h00.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-12">
-                    <div class="row text-center" id="day-closed">
-                        <p class="text-muted"><span class="glyphicon glyphicon-minus-sign"></span>Attention, le musée est fermé les mardis ainsi que les 1er mai, 1er novembre et 25 décembre.</br>
-                        Nous rappelons également qu'il n'est pas possible de réserver de billet les dimanches.</p>
-                    </div>
+                <div class="text-center" id="day-closed">
+                    <p class="text-muted"><span class="glyphicon glyphicon-minus-sign"></span>Attention, le musée est fermé les mardis ainsi que les 1er mai, 1er novembre et 25 décembre.</br>
+                    Nous rappelons également qu'il n'est pas possible de réserver de billet les dimanches.</p>
                 </div>
             </div>
-            <!-- <div class="col-lg-4">
-                <nav id="sideNavbar">
-                    <ul class="nav flex-column">
-                        <li>Journée</li>
-                        <li>Demi-journée</li>
-                        <li>Tarif réduit</li>
-                        <li>Total</li>
-                    </ul>
-                </nav>
-            </div>
         </div>
-    </div> -->
+    </div>
 </section>
 
 <!-- About -->

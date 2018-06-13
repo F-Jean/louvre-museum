@@ -530,9 +530,37 @@ div#day {
   border: 2px solid grey;
 }
 
+div#day-prices{
+  text-align: left;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+div#day-prices h4{
+  text-decoration: underline;
+}
+
+ul#d-prices{
+  padding-top: 10px;
+}
+
 div#half-day {
   border: 2px solid grey;
   margin-left: 199px;
+}
+
+div#half-day-prices{
+  text-align: left;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+div#half-day-prices h4{
+  text-decoration: underline;
+}
+
+ul#hd-prices{
+  padding-top: 10px;
 }
 
 div#day-closed {
@@ -578,6 +606,18 @@ button.add_ticket {
     font-size: 1.5em;
     font-weight: bold;
     color: black;}
+
+  .sidebar{
+    position: fixed;
+    top: 100px;
+    right: 90px;
+    background: transparent;
+  }
+
+  .left-sticky{
+    position: sticky;
+    top: 0;
+  }
 
 /*button.previous {
   margin-left: 35px;

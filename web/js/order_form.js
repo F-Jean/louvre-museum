@@ -52,20 +52,23 @@ $(function() {
       },
      rules: {},
      messages: {}
-  };
+   };
 
-  $(this).find("input, select, textarea").each(function() {
-     formValidation.rules[$(this).attr("name")] = $(this).data("rules");
-     formValidation.messages[$(this).attr("name")] = $(this).data("messages");
-  });
+   $(this).find("input, select, textarea").each(function() {
+     if($(this).attr("name") !== "appbundle_order[_token]" && typeof $(this).attr("name") !== "undefined") {
+       formValidation.rules[$(this).attr("name")] = $(this).data("rules");
+       formValidation.messages[$(this).attr("name")] = $(this).data("messages");
+     }
+    });
 
-  $("form[name=appbundle_order").validate(formValidation);
+    var validator = $("form[name=appbundle_order]").validate(formValidation);
 
+    /* Sidebar cart
+    $('#sidebar-cart').hide();*/
     $("body").on("click", ".show_order", function(e) {
-        if(!validator.valid()) {
-            e.preventDefault();
-        } else {
+        if($("form[name=appbundle_order]").valid()) {
             $(this).hide();
+            $('#sidebar-cart').show();
             $('.add_ticket').show();
             $('.delete_ticket').show();
             $('.cart').show();
@@ -151,8 +154,3 @@ $(function() {
 
     $("a.chk-popover").popover()
     });
-/*
-// Hide sideNavbar
-$(function() {
-  $('#sideNavbar').hide();
-});*/

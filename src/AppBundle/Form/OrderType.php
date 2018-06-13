@@ -31,6 +31,10 @@ class OrderType extends AbstractType
                   'required' => true,
                   'visitDay_with_1000_tickets' => true
                 ]),
+                  'data-messages' => json_encode([
+                      'required' => "Veuillez sélectionner une date.",
+                      'visitDay_with_1000_tickets' => "Veuillez saisir une date valide."
+                  ]),
                   'class' => 'datetimepicker',
               ],
               'invalid_message' => 'Veuillez saisir une date au bon format.',
@@ -42,12 +46,10 @@ class OrderType extends AbstractType
               'Demi-journée' => 2),
             'attr' => [
                 'data-rules' => json_encode([
-                  'required' => true,
-                  'regex' => "^[0-9]{2}\/[0-9]{2}\/[0-9]{4}$"
+                  'required' => true
                 ]),
                 'data-messages' => json_encode([
-                  'required' => "Veuillez sélectionner une date.",
-                  'regex' => "Veuillez saisir une date valide."
+                  'required' => "Veuillez sélectionner un type de billet."
                 ]),
                 'class' => 'input_validation'
             ]))
@@ -56,9 +58,11 @@ class OrderType extends AbstractType
             'attr' => [
                 'data-rules' => json_encode([
                     'email' => true,
+                    "required" => true
                   ]),
                 'data-messages' => json_encode([
-                    'email' => 'Veuillez saisir une adresse email.',
+                    'email' => 'Veuillez saisir une adresse email valide.',
+                    'required' => "Veuillez saisir une adresse email."
                   ]),
                 'class' => 'input_validation'
             ]))
