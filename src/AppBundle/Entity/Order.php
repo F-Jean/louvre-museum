@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
-use AppBundle\Validator\Contraints;
+use AppBundle\Validator\Constraints as AppAssert;
 
 
 /**
@@ -16,7 +16,7 @@ use AppBundle\Validator\Contraints;
  *
  * @ORM\Table(name="shop_order")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Shop_orderRepository")
- * @Contraints\ThousandTicketsValidator
+ * @AppAssert\ThousandTickets
  */
 class Order
 {

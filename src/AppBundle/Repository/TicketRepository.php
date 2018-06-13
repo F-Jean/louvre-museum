@@ -13,8 +13,8 @@ class TicketRepository extends \Doctrine\ORM\EntityRepository
   public function countTicketByVisitDay(\DateTime $visitDay) {
     return $this->createQueryBuilder("ticket")
       ->select("COUNT(ticket.id)")
-      ->join("ticket.order", "order")
-      ->where("order.visitDay = :visitDay")
+      ->join("ticket.order", "orders")
+      ->where("orders.visitDay = :visitDay")
       ->setParameter("visitDay", $visitDay)
       ->getQuery()
       ->getSingleScalarResult();

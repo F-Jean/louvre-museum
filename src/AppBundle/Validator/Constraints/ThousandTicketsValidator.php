@@ -7,7 +7,7 @@ namespace AppBundle\Validator\Constraints;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Doctrine\ORM\EntityManagerInterface;
-use Entity\Ticket;
+use AppBundle\Entity\Ticket;
 
  /**
   * Class ThousandTicketsValidator
