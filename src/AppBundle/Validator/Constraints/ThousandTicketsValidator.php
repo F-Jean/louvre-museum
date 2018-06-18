@@ -24,7 +24,7 @@ use AppBundle\Entity\Ticket;
 
      // $protocol -> Order
      if($this->entityManager->getRepository(Ticket::class)->countTicketsByVisitDay($protocol->getVisitDay()) + count($protocol->getTickets()) > 1000){
-     $this->context->buildViolation($contraint->message)
+     $this->context->buildViolation($constraint->message)
            ->atPath("visitDay")
            ->addViolation();
      }

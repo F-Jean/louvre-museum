@@ -47,7 +47,7 @@ class OrderController extends Controller
   }
 
   public function validateAction(Request $request) {
-    var_dump($request->request->get('date'));
+    $request->request->get('date');
     return $this->json(true);
   }
 }
