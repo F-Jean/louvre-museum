@@ -1,0 +1,38 @@
+{# src/AppBundle/Resources/views/form/add.html.twig #}
+
+<!-- Form's view -->
+<button type="button" href="#command-tunnel" class="btn btn-warning" data-toggle="collapse" id="buy">Acheter un billet</button>
+
+<div class="collapse" id="command-tunnel">
+    {{ form_start(form) }}
+    {{ form_errors(form) }}
+    <div id="order-form" class="step1">
+        <div class="form-row">
+            <div class="col-md-4" id="visitDay">
+                {{ form_row(form.visitDay) }}
+            </div>
+            <div class="col-md-4" id="type">
+                {{ form_row(form.type) }}
+            </div>
+            <div class="col-md-4" id="email">
+                {{ form_row(form.email) }}
+            </div>
+        </div>
+        <button type="button" href="#" class="show_order btn btn-warning">Continuer</button>
+    </div>
+    <div id="ticket-tunnel" class="row" data-index"{{ form.tickets|length == 0 ? 0 : form.tickets|last.vars.name+1 }}" data-prototype="{{ include("AppBundle:form:prototype.html.twig", {form:form.tickets.vars.prototype})|e('html_attr') }}">
+        {% for ticket in form.tickets %}
+            {{ include("AppBundle:form:prototype.html.twig", {form:ticket }) }}
+        {% endfor %}
+    </div>
+    <div class="sub-btn">
+          <button type="submit" class="cart btn btn-warning">Panier</button>
+          <button type="button" href="#" class="add_ticket btn btn-warning">Ajouter un billet</button>
+    </div>
+    {# <div id="cart-tunnel" class="row">
+        {% for order in orders %}
+            {% include "AppBundle:form:cart.html.twig" with {"order": order} %}
+        {% endfor %}
+    </div> #}
+    {{ form_end(form) }}
+</div>

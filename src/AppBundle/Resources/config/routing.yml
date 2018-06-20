@@ -3,7 +3,6 @@
 homepage:
     path:   /
     defaults: { _controller: AppBundle:Order:show }
-
-ticket_show:
-    path:   /ticket
-    defaults: { _controller: AppBundle:Ticket:show }
+validate:
+    path: /validate
+    defaults: { _controller: AppBundle:Order:validate }

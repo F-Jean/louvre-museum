@@ -1,15 +1,22 @@
 <?php
 
+// src/AppBundle/Entity/Order.php
+
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Context\ExecutionContextInterface;
+use AppBundle\Validator\Constraints as AppAssert;
+
 
 /**
  * Order
  *
  * @ORM\Table(name="shop_order")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\Shop_orderRepository")
+ * @AppAssert\ThousandTickets
  */
 class Order
 {
@@ -26,6 +33,7 @@ class Order
      * @var datetime
      *
      * @ORM\Column(name="visit_day", type="datetime")
+     * @Assert\DateTime()
      */
     private $visitDay;
 
@@ -37,30 +45,24 @@ class Order
     private $type;
 
     /**
-     * @var int
-     *
-     * @ORM\Column(name="ticket_quantity", type="integer")
-     */
-    private $ticketQuantity;
-
-    /**
      * @var \DateTime
      *
-     * @ORM\Column(name="ordered_at", type="datetime")
+     * @ORM\Column(name="ordered_at", type="datetime", nullable=true)
      */
+
     private $orderedAt;
 
     /**
      * @var int
      *
-     * @ORM\Column(name="num", type="integer")
+     * @ORM\Column(name="num", type="integer", nullable=true)
      */
     private $num;
 
     /**
      * @var float
      *
-     * @ORM\Column(name="total_price", type="decimal", precision=8, scale=2)
+     * @ORM\Column(name="total_price", type="decimal", precision=8, scale=2, nullable=true)
      */
     private $totalPrice;
 
@@ -68,13 +70,23 @@ class Order
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email(
+     *    message = "L'email '{{ value }}' n'est pas un email valide.",
+     *    checkMX = true
+     * )
      */
     private $email;
 
     /**
      * @var array
      * One Order has Many Tickets.
-     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order")
+     * @ORM\OneToMany(targetEntity="Ticket", mappedBy="order", cascade={"persist"})
+     * @Assert\Valid()
+     * @Assert\Count(
+     *    min=1,
+     *    minMessage = "Vous devez remplir au moins 1 billet"
+     *)
      */
     private $tickets;
 
@@ -124,6 +136,24 @@ class Order
     public function getVisitDay()
     {
         return $this->visitDay;
+    }
+
+    /**
+     * @Assert\Callback
+     */
+    public function validate(ExecutionContextInterface $context, $payload) {
+
+      $holidays = [
+          \DateTime::createFromFormat("m-d H:i:s", "5-1 00:00:00"),
+          \DateTime::createFromFormat("m-d H:i:s", "11-1 00:00:00"),
+          \DateTime::createFromFormat("m-d H:i:s", "12-25 00:00:00")
+      ];
+
+      if(in_array($this->visitDay->format("N"), [2, 7]) || in_array($this->visitDay, $holidays)) {
+          echo "pas de commande ce jour la";
+      }else{
+          echo "OK";
+      }exit;
     }
 
     /**

@@ -1,5 +1,7 @@
 <?php
 
+// src/AppBundle/Form/TicketType.php
+
 namespace AppBundle\Form;
 
 use AppBundle\Entity\Ticket;
@@ -18,11 +20,35 @@ class TicketType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-          ->add('firstName',    TextType::class)
-          ->add('lastName',     TextType::class)
-          ->add('country',      TextType::class)
-          ->add('birthdayDate', DateType::class)
-          ->add('reducedPrice', CheckboxType::class, array('required' => false));
+          ->add('firstName',    TextType::class, array (
+            'label' => 'Nom',
+            'attr' => [
+                'data-rules' => json_encode([
+                    'required' => true,
+                    'minlength' => '2'
+                  ]),
+                'data-messages' => json_encode([
+                    'required' => 'Veuillez remplir ce champ',
+                    'minlength' => 'Votre nom doit contenir au moins 2 lettres'
+                  ]),
+                'class' => 'input_validation'
+              ]
+          ))
+          ->add('lastName',     TextType::class, array (
+            'label' => 'Prénom',
+          ))
+          ->add('country',      TextType::class, array (
+            'label' => 'Pays',
+          ))
+          ->add('birthdayDate', DateType::class, array(
+            'label' => 'Date de naissance',
+            'widget' => 'single_text',
+            'format' => 'dd-MM-yyyy',
+          ))
+          ->add('reducedPrice', CheckboxType::class, array(
+            'label' => 'Réduction',
+            'required' => false,
+          ));
     }
 
     /**

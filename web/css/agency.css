@@ -42,8 +42,8 @@ section {
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif; }
 
 section .section-ticket {
-  padding-left: 280px;
-  padding-top: 35px;
+  /*padding-left: 280px;*/
+  padding-top: 71px;
 }
 
 @media (min-width: 768px) {
@@ -181,7 +181,10 @@ header.masthead {
 
 .service-heading {
   margin: 15px 0;
-  text-transform: none; }
+  text-transform: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;}
 
 #portfolio .portfolio-item {
   right: 0;
@@ -514,3 +517,109 @@ ul.social-buttons {
     background-color: #212529; }
     ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons li a:hover {
       background-color: #fed136; }
+
+/* Custom styles */
+
+section .section-ticket {
+  margin-left: -260px;
+  margin-right: -260px;
+  padding-left: 161px;
+}
+
+div#day {
+  border: 2px solid grey;
+}
+
+div#day-prices{
+  text-align: left;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+div#day-prices h4{
+  text-decoration: underline;
+}
+
+ul#d-prices{
+  padding-top: 10px;
+}
+
+div#half-day {
+  border: 2px solid grey;
+  margin-left: 199px;
+}
+
+div#half-day-prices{
+  text-align: left;
+  padding-top: 25px;
+  padding-left: 25px;
+}
+
+div#half-day-prices h4{
+  text-decoration: underline;
+}
+
+ul#hd-prices{
+  padding-top: 10px;
+}
+
+div#day-closed {
+  margin-top: 50px;
+  margin-bottom: -100px;
+}
+
+button#buy {
+  margin-top: 20px;
+}
+
+div#ticket-tunnel {
+  margin-left: -260px;
+  margin-right: -260px;
+}
+
+div.ticket-form {
+  border: 1px solid grey;
+  margin-left: 60px;
+  margin-top: 30px;
+  padding-top: 17px;
+  padding-bottom: 17px;
+}
+
+div.sub-btn {
+  margin-top: 60px;
+}
+
+button.add_ticket {
+  margin-left: 35px;
+}
+
+.service-heading-day {
+  margin: 15px 0;
+  text-transform: none;
+  font-size: 1.5em;
+  font-weight: bold;
+  color: black;}
+
+  .service-heading-half-day {
+    margin: 15px 0;
+    text-transform: none;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: black;}
+
+  .sidebar{
+    position: fixed;
+    top: 100px;
+    right: 90px;
+    background: transparent;
+  }
+
+  .left-sticky{
+    position: sticky;
+    top: 0;
+  }
+
+/*button.previous {
+  margin-left: 35px;
+}*/
+}
