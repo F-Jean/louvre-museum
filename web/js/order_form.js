@@ -28,13 +28,14 @@ $(function() {
         $('#sideNavbar').show();
         $('#appbundle_order_visitDay').datepicker({
             format: "dd/mm/yyyy",
+            startDate: "today",
             todayBtn: "linked",
             language: "fr",
             orientation: "bottom left",
             daysOfWeekDisabled: "0,2",
             todayHighlight: true
         }).on('changeDate', function(){
-          console.log(validator.element(this));
+            validator.element(this);
         });
     });
 
@@ -77,7 +78,7 @@ $(function() {
         }
     });
 
-    /* Check the imput date in visitDay's field doesn't match a date where
+    /* Check the input date in visitDay's field doesn't match a date where
     1000 tickets are already sold */
     $.validator.addMethod('visitDay_with_1000_tickets',
         function (value, element) {
@@ -93,7 +94,7 @@ $(function() {
             })
             return validate;
         },
-        'Plus de reservation pour ce jour !'
+        'Plus de réservation pour ce jour !'
     );
 
     // Command tunnel starts
