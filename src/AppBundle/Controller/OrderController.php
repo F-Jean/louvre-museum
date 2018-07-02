@@ -47,6 +47,8 @@ class OrderController extends Controller
   }
 
   public function validateAction(Request $request) {
+    $em = $this->getDoctrine()->getManager();
+    $this->entityManager->getRepository(Ticket::class)->countTicketsByVisitDay(\DateTime);
     $request->request->get('date');
     return $this->json(true);
   }

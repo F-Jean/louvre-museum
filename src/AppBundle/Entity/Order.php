@@ -141,7 +141,7 @@ class Order
     /**
      * @Assert\Callback
      */
-    public function validate(ExecutionContextInterface $context, $payload) {
+    public function validateReservationDates(ExecutionContextInterface $context, $payload) {
 
       $holidays = [
           \DateTime::createFromFormat("m-d H:i:s", "5-1 00:00:00"),
@@ -150,10 +150,8 @@ class Order
       ];
 
       if(in_array($this->visitDay->format("N"), [2, 7]) || in_array($this->visitDay, $holidays)) {
-          echo "pas de commande ce jour la";
-      }else{
-          echo "OK";
-      }exit;
+          echo "Pas de commande les mardis, dimanches et jours fériés.";
+      }
     }
 
     /**
