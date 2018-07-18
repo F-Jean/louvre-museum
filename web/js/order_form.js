@@ -15,6 +15,7 @@ $(function() {
       $('#half-day-prices').show();
     });
 
+
     // Hide & show the buttons before starting the command tunnel
     $('#buy').click(function(e) {
         e.preventDefault()
@@ -35,9 +36,10 @@ $(function() {
             daysOfWeekDisabled: "0,2",
             todayHighlight: true
         }).on('changeDate', function(){
-            validator.element(this);
+            validator.element(this); // Validates a single element, returns true if it is valid, false otherwise.
         });
     });
+
 
     // Validate the fields of the first step after clicking the Continue btn
     var formValidation = {
@@ -55,6 +57,7 @@ $(function() {
      messages: {}
    };
 
+
    $(this).find("input, select, textarea").each(function() {
      if($(this).attr("name") !== "appbundle_order[_token]" && typeof $(this).attr("name") !== "undefined") {
        formValidation.rules[$(this).attr("name")] = $(this).data("rules");
@@ -62,7 +65,9 @@ $(function() {
      }
     });
 
+
     var validator = $("form[name=appbundle_order]").validate(formValidation);
+
 
     /* Sidebar cart
     $('#sidebar-cart').hide();*/
@@ -78,24 +83,6 @@ $(function() {
         }
     });
 
-    /* Check the input date in visitDay's field doesn't match a date where
-    1000 tickets are already sold */
-    $.validator.addMethod('visitDay_with_1000_tickets',
-        function (value, element) {
-            var validate = true;
-            $.ajax({
-              url: '/app_dev.php/validate',
-              type: 'POST',
-              data: {date:value},
-              async:false,
-              success: function(response){
-                validate=response
-              }
-            })
-            return validate;
-        },
-        'Plus de réservation pour ce jour !'
-    );
 
     // Command tunnel starts
     var $collectionHolder;
@@ -119,6 +106,7 @@ $(function() {
         addOrderForm($collectionHolder, $newOrderLi);
     });
 
+
     /* The addTagForm() function's job is to use the data-prototype
     attribute to dynamically add a new form when this link is clicked. */
     function addOrderForm($collectionHolder, $newOrderLi, $addTicketLi) {
@@ -126,6 +114,8 @@ $(function() {
         var prototype = $collectionHolder.data('prototype');
         // Get the new index
         var index = $collectionHolder.data('index');
+
+        validator.validate();
 
         var newForm = prototype;
 
@@ -146,12 +136,37 @@ $(function() {
         })
     }
 
+
+    var dates = {};
+    /* !validator.element(this);! Validates a single element, returns true if
+    it is valid, false otherwise.
+    Check the input date in visitDay's field doesn't match a date where 1000 tickets
+    are already sold */
+    $.validator.addMethod('visitDay_with_1000_tickets', function (value, element) {
+        if(typeof dates[value] == "undefined") {
+            $.ajax({
+                url: '/app_dev.php/validateUserTickets',
+                type: 'POST',
+                data: {date:value},
+                async:false,
+                success: function(response){
+                    dates[value] = response;
+                }
+            })
+        }
+        return $collectionHolder.find('div').length + dates[value] >= 999; // Count the total amount of ticket of current request & db
+    },
+    'Plus de réservation pour ce jour !'
+    );
+
+
     $("body").on("click", ".delete_ticket", function() {
         $(this).closest(".ticket-form").find(".input_validation").each(function() {
             $(this).rules("remove");
         })
         $(this).closest(".ticket-form").remove();
     });
+
 
     $("a.chk-popover").popover()
     });

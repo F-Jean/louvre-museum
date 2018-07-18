@@ -33,7 +33,7 @@ class OrderType extends AbstractType
                 ]),
                   'data-messages' => json_encode([
                       'required' => "Veuillez sélectionner une date.",
-                      'visitDay_with_1000_tickets' => "Plus de réservation pour ce jour!."
+                      'visitDay_with_1000_tickets' => "Plus de réservation pour ce jour!"
                   ]),
                   'class' => 'datetimepicker',
               ],

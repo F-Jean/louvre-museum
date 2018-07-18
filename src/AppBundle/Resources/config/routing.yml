@@ -5,4 +5,4 @@ homepage:
     defaults: { _controller: AppBundle:Order:show }
 validate:
     path: /validate
-    defaults: { _controller: AppBundle:Order:validate }
+    defaults: { _controller: AppBundle:Order:validateUserTickets }
